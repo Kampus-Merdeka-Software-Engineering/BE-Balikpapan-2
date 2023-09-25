@@ -7,6 +7,12 @@
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kampus-Merdeka-Software-Engineering/back-end-capstone-project-section-balikpapan-group-2.git"
+  },
+  
   "author": "",
   "license": "ISC",
   "dependencies": {
