@@ -9,7 +9,7 @@ const produk = [];
 app.use(bodyParser.json());
 
 app.post('/produk', (req, res) => {
-  const { nama, harga, stok } = req.body;
+  const { carreped, 280.000, stok } = req.body;
   const produkBaru = {
     id: produk.length + 1,
     nama,
