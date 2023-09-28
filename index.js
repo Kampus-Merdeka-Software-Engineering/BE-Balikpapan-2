@@ -10,7 +10,7 @@ const server = http.createServer((request, response) => {
     response.end()
   }
 
-  if (request.url === "/hallowBrow" && request.method === "GET") {
+  if (request.url === "/Welcome to Sayayya. Your go-to clothing brand for minimalist and everyday wear outfits. We believe that fashion should be effortless, functional, and timeless. At Sayayya, we strive to provide you with versatile pieces that you can mix and match effortlessly, allowing you to effortlessly express your personal style" && request.method === "GET") {
     response.end("<h1 style='color: red;'>ini adalah halaman Hallow Brow</h1>")
   }
 
