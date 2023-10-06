@@ -1,25 +1,34 @@
+require('dotenv').config();
+const cors = require('cors');
+const express = require('express');
+const app = express();
+const PORT = process.env.PORT || 3000;
+const { prisma } = require('./config/prisma.js');
+const { getAllGalleryController } = require('./controllers/galleryController.js');
 
-const http = require('http');
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-const server = http.createServer((request, response) => {
-  console.log(request, "<<< request")
-  console.log(response, "<<< response")
-
-  if (request.url === "/") {
-    response.write("Ini halaman kosong ya ?");
-    response.end()
-  }
-
-  if (request.url === "/Welcome to Sayayya. Your go-to clothing brand for minimalist and everyday wear outfits. We believe that fashion should be effortless, functional, and timeless. At Sayayya, we strive to provide you with versatile pieces that you can mix and match effortlessly, allowing you to effortlessly express your personal style" && request.method === "GET") {
-    response.end("<h1 style='color: red;'>Welcome to Sayayya. Your go-to clothing brand for minimalist and everyday wear outfits. We believe that fashion should be effortless, functional, and timeless. At Sayayya, we strive to provide you with versatile pieces that you can mix and match effortlessly, allowing you to effortlessly express your personal style</h1>")
-  }
-
-  if (request.url === "/balikpapan2" && request.method === "GET") {
-    response.end("")
-  }
+app.get('/', (req, res)=> {
+  res.send('Hello World');
 })
 
-const PORT = 4000;
-server.listen(PORT, () => {
-  console.log(`Server sedang berjalan pada url dan port http://localhost:${PORT}`)
-})
+app.get('/gallery', getAllGalleryController)
+
+app.post('/subscribe', async (req, res) => {
+  const { email } = req.body;
+  const subscriber = await prisma.emailSubscriber.create({
+    data: {
+      email
+    }
+  });
+  res.status(201).json({
+    message: "Thank you for subscribing!",
+    subscriber
+  });
+});
+
+app.listen(PORT, ()=> {
+  console.log(`Server running on port ${PORT}`);
+});
