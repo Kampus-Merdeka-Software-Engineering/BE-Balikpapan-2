@@ -15,7 +15,7 @@ model Gallery {
   name              String
   instagramUrl      String?
   images            String
-  createdAt DateTime @default(now())
+  createdAt         DateTime @default(now())
 }
 
 model EmailSubscriber {

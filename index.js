@@ -5,6 +5,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const { prisma } = require('./config/prisma.js');
 const { getAllGalleryController } = require('./controllers/galleryController.js');
+const { galleryRoutes } = require('./routes/galleryRoutes.js');
 
 app.use(cors());
 app.use(express.json());
@@ -14,13 +15,14 @@ app.get('/', (req, res)=> {
   res.send('Hello World');
 })
 
+app.use('/gallery', galleryRoutes)
 app.get('/gallery', getAllGalleryController)
 
 app.post('/subscribe', async (req, res) => {
   const { email } = req.body;
   const subscriber = await prisma.emailSubscriber.create({
     data: {
-      email
+      email : email
     }
   });
   res.status(201).json({
