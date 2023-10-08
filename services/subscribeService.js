@@ -1,12 +1,14 @@
 const { prisma } = require('../config/prisma');
 
-const getSubscribeService = async()=>{
-    const subscriber = await prisma.emailSubscriber.create({
-        data: {
-          email : email
-        }
-      });
-    return subscriber
+const createSubscribeService = async(body)=>{
+  const { email } = body;
+  console.log(body);
+  const createdSubscriber = await prisma.emailSubscriber.create({
+    data: {
+      email
     }
+  });
+  return createdSubscriber
+}
 
-module.exports = {getSubscribeService}
+module.exports = {createSubscribeService}

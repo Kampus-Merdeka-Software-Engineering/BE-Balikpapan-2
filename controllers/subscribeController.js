@@ -1,12 +1,17 @@
-const { getSubscribeService } = require('../services/subscribeService.js');
+const { createSubscribeService } = require('../services/subscribeService.js');
 
-const getAllSubscribeController = async (req, res) => {
-    const { email } = req.body;
-    const subscriber = await getSubscribeService()
+const createSubscribeController = async (req, res) => {
+    const createdSubscriber = await createSubscribeService(req.body)
+    if (!createdSubscriber) {
+      res.status(400).json({
+        message : "Failed to Subscribe"
+      })
+    }
     res.status(201).json({
-    message: "Thank you for subscribing!",
-    subscriber
-  });
-}
+      message: "Thank you for subscribing!",
+      data : createdSubscriber
+    });
+  }
 
-module.exports = { getAllSubscribeController }
+
+module.exports = { createSubscribeController }
