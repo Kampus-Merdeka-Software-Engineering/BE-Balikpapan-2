@@ -8,6 +8,8 @@ const { getAllGalleryController } = require('./controllers/galleryController.js'
 const { galleryRoutes } = require('./routes/galleryRoutes.js');
 const { subscribeRoutes } = require('./routes/subscribeRoutes.js');
 const { createSubscribeController } = require('./controllers/subscribeController.js');
+const { dressesRoutes } = require('./routes/dressesRoutes.js');
+const { getAllDressesController } = require('./controllers/dressesController.js')
 
 app.use(cors());
 app.use(express.json());
@@ -17,10 +19,12 @@ app.get('/', (req, res)=> {
   res.send('Hello World');
 })
 
-app.use('/gallery', galleryRoutes)
-app.get('/gallery', getAllGalleryController)
+app.use('/galleries', galleryRoutes)
+app.get('/galleries', getAllGalleryController)
 app.use('/subscribe', subscribeRoutes)
 app.post('/subscribe', createSubscribeController)
+app.use('/dresses', dressesRoutes)
+app.get('/dresses',getAllDressesController)
 
 // app.post('/subscribe', async (req, res) => {
 //   const { email } = req.body;
