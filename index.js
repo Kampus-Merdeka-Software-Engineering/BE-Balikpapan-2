@@ -8,8 +8,7 @@ const { getAllGalleryController } = require('./controllers/galleryController.js'
 const { galleryRoutes } = require('./routes/galleryRoutes.js');
 const { subscribeRoutes } = require('./routes/subscribeRoutes.js');
 const { createSubscribeController } = require('./controllers/subscribeController.js');
-const { dressesRoutes } = require('./routes/dressesRoutes.js');
-const { getAllDressesController } = require('./controllers/dressesController.js')
+
 
 app.use(cors());
 app.use(express.json());
@@ -23,21 +22,9 @@ app.use('/galleries', galleryRoutes)
 app.get('/galleries', getAllGalleryController)
 app.use('/subscribe', subscribeRoutes)
 app.post('/subscribe', createSubscribeController)
-app.use('/dresses', dressesRoutes)
-app.get('/dresses',getAllDressesController)
 
-// app.post('/subscribe', async (req, res) => {
-//   const { email } = req.body;
-//   const subscriber = await prisma.emailSubscriber.create({
-//     data: {
-//       email : email
-//     }
-//   });
-//   res.status(201).json({
-//     message: "Thank you for subscribing!",
-//     subscriber
-//   });
-// });
+
+
 
 app.listen(PORT, ()=> {
   console.log(`Server running on port ${PORT}`);
